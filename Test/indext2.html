@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    var objArrow = {
+      result : 0
+    }
+
+    var innerFunction
+
+    objArrow.add = function(a,b){
+      innerFunction = () => {
+        this.result = a+b;
+      }
+
+      innerFunction();
+    }
+
+objArrow.add(2,3);
+
+  </script>
+
+  
+</body>
+</html>

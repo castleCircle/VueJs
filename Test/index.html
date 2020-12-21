@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1 v-if="show">{{name}}##!</h1>
+        <h1 v-else>{{name}}##</h1>
+        <h1 v-once>{{name}}</h1>
+        <h1>{{name}}</h1>
+        <h2>{{x}}</h2>
+        <h2>{{y}}</h2>
+        <button @Click="dataChange()">변경</button>
+        <button @Click="showChange">show</button>
+        <input v-model="name">
+        <ul v-for="list in lists" :key="list.id">
+          <li>{{list.name}}</li>
+        </ul>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el : "#app",
+        data : {
+          name : 'hello Vue.js',
+          x:1,
+          y:2,
+          show:true,
+          lists:[
+            {id:"1" ,name:"로그인"},
+            {id:"2" ,name:"즉시이체"},
+            {id:"3" ,name:"예약"},
+            {id:"4" ,name:"간편이체"},
+          ]
+        },
+        methods:{
+          dataChange:function(){
+            setTimeout(()=>{
+              this.x=11
+            },2000);
+          },
+          showChange:function(){
+            this.show=!this.show;
+          }
+        },
+        watch:{
+          x : function(after,before){
+            console.log("xwat!!" + after);
+          },      
+
+          y : function(after,before){
+            console.log("ywat!!" + after);
+          }
+        },
+        created:function(){
+          console.log("create");
+        },
+        mounted:function(){
+          console.log("mounted");
+        },
+        updated:function(){
+          console.log("updated");
+        }
+
+      })
+    </script>
+  
+</body>
+</html>

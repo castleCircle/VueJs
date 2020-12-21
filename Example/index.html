@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1 v-if="show">{{name}}!!</h1>
+      <h1 v-else="show">{{name}}##</h1>
+      <h1 v-once>단 한번만 렌더링 {{name}}</h1>
+      <h1 v-pre>{{name}}</h1>
+      <h2>{{x}}</h2>
+      <h2>{{y}}</h2>
+      <h2>{{changeX}}</h2>
+      <h2>{{changeY}}</h2>
+      <div @click="dataChangeD">
+        <p @click="dataChangeP">
+          <button @click.stop="dataChange" v-on:contextmenu.prevent>
+            변경
+          </button>
+        </p>
+      </div>
+      <button @click="dataChange" v-on:contextmenu.prevent>변경</button>
+      <input v-model="name" @keyup.enter="enterKeyup" />
+      <button @click="showChange">show</button>
+      <ul v-for="list in lists" :key="list.id">
+        <li>{{list.name}}</li>
+      </ul>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          name: "Hello Vue.js",
+          x: 1,
+          y: 2,
+          show: true,
+          lists: [
+            { id: "1", name: "로그인" },
+            { id: "2", name: "즉시이체" },
+            { id: "3", name: "예약이체" },
+            { id: "4", name: "간편이체" },
+          ],
+        },
+        methods: {
+          dataChange: function (event) {
+            console.log("dataChange");
+            console.log(event);
+            console.log(event.target);
+            console.log(event.currentTarget);
+            console.log(event.eventPhase);
+          },
+          dataChangeP: function (event) {
+            console.log("dataChangeP");
+            console.log(event);
+            console.log(event.target);
+            console.log(event.currentTarget);
+            console.log(event.eventPhase);
+          },
+          dataChangeD: function (event) {
+            console.log("dataChangeD");
+            console.log(event);
+            console.log(event.target);
+            console.log(event.currentTarget);
+            console.log(event.eventPhase);
+          },
+          showChange: function () {
+            this.show = !this.show;
+          },
+          enterKeyup: function () {
+            console.log("enterKeyup");
+          },
+        },
+        computed: {
+          changeX: function () {
+            console.log("changeX call");
+            return this.x;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

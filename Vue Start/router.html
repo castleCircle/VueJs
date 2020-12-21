@@ -5,53 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
 <body>
-    <div id="app">
-        <div>
-            <router-link to="/login">Login</router-link>
-            <router-link to="/main">Main</router-link>
-        </div>
-        <router-view></router-view>
+    <div id="root">
+        <div>{{first}}곱하기 {{second}}는 ?</div>
+        <form>
+            <input type="number" v-model="value">
+            <button>입력</button>
+            <div>{{value}}</div>
+        </form>
+        <div id="result"></div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-
     <script>
-        var LoginComponent = {
-            template: '<div>login</div>'
-        }
-
-        var MainComponent = {
-            template: '<div>main</div>'
-        }
-
-        var Router = new VueRouter({
-            //페이지의 라우팅 정보 => 어떤 페이지로 이동했을때 어떤정보인지 배열로 존재 , 페이지의 갯수만큼 객체가 필요함
-            routes: [
-                //로그인 페이지 정보
-                {
-                    //페이지의 url 이름
-                    path: '/login',
-                    //해당 url에서 표시될 컴포넌트
-                    component: LoginComponent
-                },
-                //메인 페이지 정보
-                {
-                    path: '/main',
-                    component: MainComponent
-
-                }
-            ]
+        const app = new Vue({
+            el: '#root',
+            data: {
+                first: Math.ceil(Math.random() * 9),
+                second: Math.ceil(Math.random() * 9),
+                value: '',
+                result: '',
+            },
+            methods: {}
         })
-
-
-        new Vue({
-            el: '#app',
-            router: Router
-        });
     </script>
 
 </body>
