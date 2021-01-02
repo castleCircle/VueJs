@@ -8,7 +8,7 @@
             <th>시나리오 ID</th>
           </thead>
           <tbody>
-              <tr v-for="testHistory in testHistoryList" :key="testHistory.time">
+              <tr v-for="testHistory in this.$store.state.testHistoryList" :key="testHistory.time">
                 <td>{{testHistory.date}}</td>
                 <td>{{testHistory.time}}</td>
                 <td>{{testHistory.name}}</td>
@@ -23,11 +23,7 @@ export default {
     name:"TestHistory",
      data(){
       return {
-          testHistoryList:[
-          {thId:"1",date:"20190606",time:"010000",name:"시나리오1"},
-          {thId:"2",date:"20190606",time:"020000",name:"시나리오2"},
-          {thId:"3",date:"20190606",time:"030000",name:"시나리오3"},
-        ]
+          
       }
     }
 }

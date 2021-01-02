@@ -7,7 +7,7 @@
             <Navigation></Navigation>
         </nav>
         <section>
-           <component :is="currentComponent" :user-id="userId"></component>
+           <component :is="this.$store.state.currentComponent" :user-id="userId"></component>
         </section>
         <footer>
             copyright
@@ -16,7 +16,6 @@
 </template>
 
 <script>
-    import eventBus from "./EventBus"
     import Navigation from "@/components/Navigation"
     import TestExecution from "@/components/TestExecution"
     import TestHistory from "@/components/TestHistory"
@@ -29,17 +28,16 @@
         },
         data(){
             return {
-                userId:"guest",
-                currentComponent:"TestExecution"
+                userId:"guest"
             }
         },
         methods:{
             changeCurrentComponent(screen){
-                this.currentComponent = screen;
+                this.$store.state.currentComponent = screen;
             }
         },
         created(){
-            eventBus.$on("change-current-component",this.currentComponent);
+            this.eventBus.$on("change-current-component",this.changeCurrentComponent);
         }
     }
 </script>

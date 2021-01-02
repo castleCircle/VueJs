@@ -1,0 +1,19 @@
+export default{
+    testScenarioList:[
+        {tsId:"ts1",tsName:"시나리오1"},
+        {tsId:"ts2",tsName:"시나리오2"},
+        {tsId:"ts3",tsName:"시나리오3"},
+    ],
+    testHistoryList:[
+        {thId:"1",date:"20190606",time:"010000",name:"시나리오1"},
+        {thId:"2",date:"20190606",time:"020000",name:"시나리오2"},
+        {thId:"3",date:"20190606",time:"030000",name:"시나리오3"},
+    ],
+    testCaseList:[
+        {tcId:"tc1",tcName:"케이스1",tsId:"ts1"},
+        {tcId:"tc2",tcName:"케이스2",tsId:"ts1"},
+        {tcId:"tc3",tcName:"케이스3",tsId:"ts2"}
+    ],
+    currentComponent:"TestExecution",
+    selectTsId:""
+}

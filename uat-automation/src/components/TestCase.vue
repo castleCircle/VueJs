@@ -8,7 +8,7 @@
         <th>시나리오ID</th>
       </thead>
       <tbody>
-        <tr v-for="testCase in testCaseListFiltered" :key="testCase.tcId">
+        <tr v-for="testCase in filteredTcList" :key="testCase.tcId">
             <td>{{testCase.tcId}}</td>
             <td>{{testCase.tcName}}</td>
             <td>{{testCase.tsId}}</td>
@@ -19,31 +19,34 @@
 </template>
 
 <script>
-import eventBus from "../EventBus"
 
 export default {
     name:"TestCase",
+    props:[
+      "selectTsId"
+    ],
     data(){
-        return {
-          testCaseList:[
-              {tcId:"tc1",tcName:"케이스1",tsId:"ts1"},
-              {tcId:"tc2",tcName:"케이스2",tsId:"ts1"},
-              {tcId:"tc3",tcName:"케이스3",tsId:"ts2"}
-          ],
+        return {          
           testCaseListFiltered:[
           ]
         }
       },
-      methods:{
-        filterTestCase(tsId){
-          this.testCaseListFiltered = this.testCaseList.filter(function(row){
-            return row.tsId === tsId;
-          })
+      computed:{
+        filteredTcList:function(){
+
+            if(this.selectTsId != ""){
+               return this.$store.state.testCaseList.filter((row)=>{
+                return row.tsId === this.selectTsId;
+              }) 
+            }else{
+              return [...this.$store.state.testCaseList];
+            }
+
+            
         }
       },
       created(){
-        this.testCaseListFiltered = [...this.testCaseList];
-        eventBus.$on("selectTsId",this.filterTestCase);
+        this.testCaseListFiltered = [...this.$store.state.testCaseList]
       }
 }
 </script>

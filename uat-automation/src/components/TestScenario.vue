@@ -7,7 +7,7 @@
           <th>시나리오명</th>
         </thead>
         <tbody>
-          <tr v-for="testScenario in testScenarioList" :key="testScenario.tsId" @click="selectTsId(testScenario.tsId)">
+          <tr v-for="testScenario in this.$store.state.testScenarioList" :key="testScenario.tsId" @click="selectTsId1(testScenario.tsId)">
             <td>{{testScenario.tsId}}</td>
             <td>{{testScenario.tsName}}</td>
           </tr>
@@ -17,24 +17,19 @@
 </template>
 <script>
 
-    import eventBus from '../EventBus'
-
+    import Constant from '../Constant'
     export default {
         name:"TestScenario",
         data(){
             return {
-                screenName: "테스트 시나리오",
-                testScenarioList:[
-                  {tsId:"ts1",tsName:"시나리오1"},
-                  {tsId:"ts2",tsName:"시나리오2"},
-                  {tsId:"ts3",tsName:"시나리오3"},
-                ]
+                screenName: "테스트 시나리오"               
             }
-            },
+        },
         methods:{
-            selectTsId(tsId){
-              console.log(tsId);
-                eventBus.$emit("selectTsId",tsId);
+            selectTsId1(tsId){
+              this.$store.commit(Constant.SELECT_TS_ID,{
+                selectTsId : tsId
+              });
             }
         }
     }

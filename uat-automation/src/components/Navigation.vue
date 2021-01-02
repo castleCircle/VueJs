@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import eventBus from "../EventBus"
+import Constant from "../Constant"
 export default {
     name:"Navigation",
     data(){
@@ -24,11 +24,17 @@ export default {
     methods:{
       changeTestExecution(){
         console.log('changeTestExecution');
-        eventBus.$emit("change-current-component",this.nav1.screen)
+        
+        this.$store.commit(Constant.CHANGE_CURRENT_COMPONENT,{
+            currentComponent:this.nav1.screen
+        });
       },
       changeTestHistory(){
         console.log('changeTestHistory');
-        eventBus.$emit("change-current-component",this.nav2.screen)
+        
+         this.$store.commit(Constant.CHANGE_CURRENT_COMPONENT,{
+            currentComponent:this.nav2.screen
+        });
       }
     }
 }

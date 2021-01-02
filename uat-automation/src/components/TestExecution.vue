@@ -2,7 +2,7 @@
     <div class="container">
         <h5 align="right">사용자 : {{userId}}</h5>
         <TestScenario></TestScenario>
-        <TestCase></TestCase>
+        <TestCase :select-ts-id="this.$store.state.selectTsId"></TestCase>
         <p></p>
         <button @click="execution">실행</button>
     </div>
