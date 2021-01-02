@@ -1,32 +1,47 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home!</router-link> |
-      <router-link to="/about">About</router-link>
+    <div class="container">
+        <header>
+            <h1 align="center">UAT Automation</h1>
+        </header>
+        <nav>
+            <Navigation></Navigation>
+        </nav>
+        <section>
+            <TestExecution v-if="currentComponent == 'test-execution'"></TestExecution>
+            <TestHistory v-if="currentComponent == 'test-history'"></TestHistory>
+        </section>
+        <footer>
+            copyright
+        </footer>
     </div>
-    <router-view/>
-  </div>
 </template>
 
+<script>
+import Navigation from '@/components/Navigation.vue';
+import TestExecution from '@/components/TestExecution.vue';
+import TestHistory from '@/components/TestHistory.vue';
+import eventBus from './EventBus';
+
+export default{
+  components: { Navigation, TestExecution , TestHistory },
+    nmae:"App",
+    data(){
+        return {
+            userId : "guest",
+            currentComponent: "test-execution"
+        }
+    },
+    methods:{
+        changeCurrentComponent(screen){
+            this.currentComponent = screen;
+        }
+    },
+    created(){
+        eventBus.$on("change-current-component",this.changeCurrentComponent)
+    }
+}
+</script>
+
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>

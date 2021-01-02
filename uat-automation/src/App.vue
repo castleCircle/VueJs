@@ -1,28 +1,49 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div>
+        <header>
+            <h1 align="center">UAT Automation</h1>
+        </header>
+        <nav>
+            <Navigation></Navigation>
+        </nav>
+        <section>
+           <component :is="currentComponent" :user-id="userId"></component>
+        </section>
+        <footer>
+            copyright
+        </footer>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+    import eventBus from "./EventBus"
+    import Navigation from "@/components/Navigation"
+    import TestExecution from "@/components/TestExecution"
+    import TestHistory from "@/components/TestHistory"
+    export default{
+        name:"App",
+        components:{
+            Navigation,
+            TestExecution,
+            TestHistory
+        },
+        data(){
+            return {
+                userId:"guest",
+                currentComponent:"TestExecution"
+            }
+        },
+        methods:{
+            changeCurrentComponent(screen){
+                this.currentComponent = screen;
+            }
+        },
+        created(){
+            eventBus.$on("change-current-component",this.currentComponent);
+        }
+    }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
